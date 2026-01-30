@@ -12,3 +12,6 @@ example/
 # My custom formatting logic; only used during development
 fmt.sh
 
+# My custom makefile for testing
+lashfile
+
