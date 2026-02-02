@@ -6,10 +6,9 @@ repository: https://github.com/BendyLand/Hasty
 environment:
   sdk: ^3.10.7
 
-# Add regular dependencies here.
 dependencies:
   mason_logger: ^0.3.3
-  # path: ^1.9.0
+  beautiful_soup_dart: ^0.3.0
 
 dev_dependencies:
   lints: ^6.0.0

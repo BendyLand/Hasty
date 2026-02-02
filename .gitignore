@@ -14,4 +14,6 @@ fmt.sh
 
 # My custom makefile for testing
 lashfile
+*summary*
+*main*
 
