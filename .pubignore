@@ -1,0 +1,12 @@
+# Generated output — not part of the package
+build/
+
+# Dart tooling
+.dart_tool/
+pubspec.lock
+
+# Development scripts
+fmt.sh
+lashfile
+*summary*
+*main*

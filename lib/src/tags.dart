@@ -7,9 +7,7 @@ String? _styleAttr(Style? style) {
   return s.isEmpty ? null : s;
 }
 
-// ---------------------------------------------------------------------------
-// Text
-// ---------------------------------------------------------------------------
+// SECTION: Text
 
 enum TextKind { h1, h2, h3, h4, h5, h6, body, caption, label }
 
@@ -39,9 +37,7 @@ Node text(
   );
 }
 
-// ---------------------------------------------------------------------------
-// Headings (convenience wrappers around text())
-// ---------------------------------------------------------------------------
+// SECTION: Headings
 
 Node h1(String content, {Style? style, String? classes}) =>
     text(content, kind: TextKind.h1, style: style, classes: classes);
@@ -61,9 +57,7 @@ Node h5(String content, {Style? style, String? classes}) =>
 Node h6(String content, {Style? style, String? classes}) =>
     text(content, kind: TextKind.h6, style: style, classes: classes);
 
-// ---------------------------------------------------------------------------
-// Inline text
-// ---------------------------------------------------------------------------
+// SECTION: Inline Text
 
 /// A paragraph.
 Node p(String content, {Style? style, String? classes}) {
@@ -101,9 +95,7 @@ Node em(String content, {Style? style, String? classes}) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Containers
-// ---------------------------------------------------------------------------
+// SECTION: Containers
 
 /// A generic container.
 Node div({String? id, String? classes, List<Node>? children, Style? style}) {
@@ -178,9 +170,7 @@ Node article({
   );
 }
 
-// ---------------------------------------------------------------------------
-// Lists
-// ---------------------------------------------------------------------------
+// SECTION: Lists
 
 /// An unordered list.
 Node ul({List<Node>? children, String? classes, Style? style}) {
@@ -209,9 +199,7 @@ Node li(String content, {Style? style, String? classes}) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Interactive
-// ---------------------------------------------------------------------------
+// SECTION: Interactive
 
 /// An anchor link.
 Node a({
@@ -246,9 +234,7 @@ Node button(String label, {String? type, String? classes, Style? style}) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Media
-// ---------------------------------------------------------------------------
+// SECTION: Media
 
 /// An image.
 Node img({required String src, String? alt, String? classes, Style? style}) {
@@ -277,9 +263,7 @@ Node br() => Node(tag: 'br');
 // ignore: non_constant_identifier_names
 Node raw(String html) => Node(tag: 'span', content: html, rawHtml: true);
 
-// ---------------------------------------------------------------------------
-// Forms
-// ---------------------------------------------------------------------------
+// SECTION: Forms
 
 /// A form container.
 Node form({
@@ -480,9 +464,7 @@ Node label({
   );
 }
 
-// ---------------------------------------------------------------------------
-// Tables
-// ---------------------------------------------------------------------------
+// SECTION: Tables
 
 /// A table.
 Node table({String? id, String? classes, Style? style, List<Node>? children}) {
@@ -556,7 +538,7 @@ Node th({
     attrs: {
       'colspan': colspan?.toString(),
       'rowspan': rowspan?.toString(),
-      'scope': scope != null ? scope.name : null,
+      'scope': scope?.name,
       'class': classes,
       'style': _styleAttr(style),
     },
