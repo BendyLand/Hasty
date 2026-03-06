@@ -162,10 +162,10 @@ class Style {
 
   String get inlineStyle {
     final parts = <String>[];
-
     if (color != null) parts.add('color: $color');
-    if (backgroundColor != null)
+    if (backgroundColor != null) {
       parts.add('background-color: $backgroundColor');
+    }
     if (padding != null) parts.add('padding: ${padding}px');
     if (paddingTop != null) parts.add('padding-top: ${paddingTop}px');
     if (paddingRight != null) parts.add('padding-right: ${paddingRight}px');
@@ -191,10 +191,12 @@ class Style {
     if (border != null) parts.add('border: $border');
     if (borderColor != null) parts.add('border-color: $borderColor');
     if (borderWidth != null) parts.add('border-width: ${borderWidth}px');
-    if (textAlign != null)
+    if (textAlign != null) {
       parts.add('text-align: ${_textAlignValue(textAlign!)}');
-    if (textDecoration != null)
+    }
+    if (textDecoration != null) {
       parts.add('text-decoration: ${_textDecorationValue(textDecoration!)}');
+    }
     if (opacity != null) parts.add('opacity: $opacity');
     if (overflow != null) parts.add('overflow: $overflow');
     if (gap != null) parts.add('gap: ${gap}px');
@@ -209,9 +211,9 @@ class Style {
     if (display != null) parts.add('display: ${_displayValue(display!)}');
     if (float != null) parts.add('float: ${_floatValue(float!)}');
     if (flexWrap != null) parts.add('flex-wrap: ${_flexWrapValue(flexWrap!)}');
-    if (alignSelf != null)
+    if (alignSelf != null) {
       parts.add('align-self: ${_alignSelfValue(alignSelf!)}');
-
+    }
     return parts.join('; ');
   }
 

@@ -6,9 +6,6 @@
 # https://dart.dev/guides/libraries/private-files#pubspeclock.
 pubspec.lock
 
-# Keep this out of the repo until it can be used as a real showcase
-example/
-
 # My custom formatting logic; only used during development
 fmt.sh
 

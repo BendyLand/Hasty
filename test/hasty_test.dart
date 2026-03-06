@@ -398,4 +398,277 @@ void main() {
       expect(html, equals('<br>'));
     });
   });
+
+  // ---------------------------------------------------------------------------
+  // Layout
+  // ---------------------------------------------------------------------------
+
+  group('vStack', () {
+    test('renders a div with column flex styles', () {
+      final html = renderHtml(vStack());
+      expect(html, contains('<div'));
+      expect(html, contains('flex-direction: column'));
+      expect(html, contains('display: flex'));
+    });
+
+    test('default main axis alignment is flex-start', () {
+      final html = renderHtml(vStack());
+      expect(html, contains('justify-content: flex-start'));
+    });
+
+    test('mainAxisAlignment.center maps to center', () {
+      final html = renderHtml(
+        vStack(mainAxisAlignment: MainAxisAlignment.center),
+      );
+      expect(html, contains('justify-content: center'));
+    });
+
+    test('mainAxisAlignment.spaceBetween maps to space-between', () {
+      final html = renderHtml(
+        vStack(mainAxisAlignment: MainAxisAlignment.spaceBetween),
+      );
+      expect(html, contains('justify-content: space-between'));
+    });
+
+    test('crossAxisAlignment.center maps to align-items: center', () {
+      final html = renderHtml(
+        vStack(crossAxisAlignment: CrossAxisAlignment.center),
+      );
+      expect(html, contains('align-items: center'));
+    });
+
+    test('id and classes are rendered as attributes', () {
+      final html = renderHtml(vStack(id: 'main', classes: 'container'));
+      expect(html, contains('id="main"'));
+      expect(html, contains('class="container"'));
+    });
+
+    test('extra Style properties are merged in', () {
+      final html = renderHtml(vStack(style: Style(gap: 16)));
+      expect(html, contains('gap: 16.0px'));
+      expect(html, contains('display: flex'));
+    });
+
+    test('renders children', () {
+      final html = renderHtml(vStack(children: [p('Hello'), p('World')]));
+      expect(html, contains('<p>Hello</p>'));
+      expect(html, contains('<p>World</p>'));
+    });
+  });
+
+  group('hStack', () {
+    test('renders a div with row flex styles', () {
+      final html = renderHtml(hStack());
+      expect(html, contains('flex-direction: row'));
+      expect(html, contains('display: flex'));
+    });
+
+    test('default cross axis alignment is center', () {
+      final html = renderHtml(hStack());
+      expect(html, contains('align-items: center'));
+    });
+
+    test('mainAxisAlignment.end maps to flex-end', () {
+      final html = renderHtml(hStack(mainAxisAlignment: MainAxisAlignment.end));
+      expect(html, contains('justify-content: flex-end'));
+    });
+
+    test('crossAxisAlignment.stretch maps to stretch', () {
+      final html = renderHtml(
+        hStack(crossAxisAlignment: CrossAxisAlignment.stretch),
+      );
+      expect(html, contains('align-items: stretch'));
+    });
+
+    test('extra Style properties are merged in', () {
+      final html = renderHtml(hStack(style: Style(gap: 8)));
+      expect(html, contains('gap: 8.0px'));
+      expect(html, contains('flex-direction: row'));
+    });
+  });
+
+  group('zStack', () {
+    test('renders position: relative', () {
+      final html = renderHtml(zStack());
+      expect(html, contains('position: relative'));
+    });
+
+    test('extra Style properties are merged in', () {
+      final html = renderHtml(zStack(style: Style(width: 200)));
+      expect(html, contains('position: relative'));
+      expect(html, contains('width: 200.0px'));
+    });
+
+    test('id and classes are rendered', () {
+      final html = renderHtml(zStack(id: 'layer', classes: 'overlay'));
+      expect(html, contains('id="layer"'));
+      expect(html, contains('class="overlay"'));
+    });
+  });
+
+  group('spacer', () {
+    test('renders flex: 1', () {
+      final html = renderHtml(spacer());
+      expect(html, contains('flex: 1'));
+    });
+
+    test('is a div with no children', () {
+      final html = renderHtml(spacer());
+      expect(html, contains('<div'));
+      expect(html, contains('</div>'));
+    });
+  });
+
+  group('padding widget', () {
+    test('all sets uniform padding', () {
+      final html = renderHtml(padding(child: p('x'), all: 16));
+      expect(html, contains('padding: 16.0px'));
+    });
+
+    test('horizontal sets left and right padding', () {
+      final html = renderHtml(padding(child: p('x'), horizontal: 12));
+      expect(html, contains('padding-left: 12.0px'));
+      expect(html, contains('padding-right: 12.0px'));
+    });
+
+    test('vertical sets top and bottom padding', () {
+      final html = renderHtml(padding(child: p('x'), vertical: 8));
+      expect(html, contains('padding-top: 8.0px'));
+      expect(html, contains('padding-bottom: 8.0px'));
+    });
+
+    test('individual sides', () {
+      final html = renderHtml(
+        padding(child: p('x'), top: 1, right: 2, bottom: 3, left: 4),
+      );
+      expect(html, contains('padding-top: 1.0px'));
+      expect(html, contains('padding-right: 2.0px'));
+      expect(html, contains('padding-bottom: 3.0px'));
+      expect(html, contains('padding-left: 4.0px'));
+    });
+
+    test('wraps the child', () {
+      final html = renderHtml(padding(child: p('inner'), all: 8));
+      expect(html, contains('<p>inner</p>'));
+    });
+  });
+
+  group('center', () {
+    test('renders flex centering styles', () {
+      final html = renderHtml(center(child: p('x')));
+      expect(html, contains('display: flex'));
+      expect(html, contains('justify-content: center'));
+      expect(html, contains('align-items: center'));
+    });
+
+    test('wraps the child', () {
+      final html = renderHtml(center(child: h1('Title')));
+      expect(html, contains('<h1>Title</h1>'));
+    });
+
+    test('extra Style properties are merged in', () {
+      final html = renderHtml(
+        center(child: p('x'), style: Style(height: 100)),
+      );
+      expect(html, contains('height: 100.0px'));
+      expect(html, contains('justify-content: center'));
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Parser
+  // ---------------------------------------------------------------------------
+
+  group('Parser', () {
+    test('boolean flag is true when present', () {
+      final p = Parser()..register('--verbose', 'Enable verbose output');
+      p.parse(['--verbose']);
+      expect(p.getParsed()['--verbose'], isTrue);
+    });
+
+    test('unrecognised flag throws ArgParseException', () {
+      final p = Parser()..register('--known', 'A known flag');
+      expect(() => p.parse(['--unknown']), throwsA(isA<ArgParseException>()));
+    });
+
+    test('typed flag with space separator', () {
+      final p = Parser()..register('output', 'Output dir', type: String);
+      p.parse(['output', 'build']);
+      expect(p.getParsed()['output'], equals('build'));
+    });
+
+    test('typed flag with = separator', () {
+      final p = Parser()..register('output', 'Output dir', type: String);
+      p.parse(['output=dist']);
+      expect(p.getParsed()['output'], equals('dist'));
+    });
+
+    test('typed flag with : separator', () {
+      final p = Parser()..register('output', 'Output dir', type: String);
+      p.parse(['output:public']);
+      expect(p.getParsed()['output'], equals('public'));
+    });
+
+    test('typed int flag is coerced', () {
+      final p = Parser()..register('count', 'A count', type: int);
+      p.parse(['count=42']);
+      expect(p.getParsed()['count'], equals(42));
+    });
+
+    test('typed double flag is coerced', () {
+      final p = Parser()..register('ratio', 'A ratio', type: double);
+      p.parse(['ratio=3.14']);
+      expect(p.getParsed()['ratio'], closeTo(3.14, 0.001));
+    });
+
+    test('typed bool flag is coerced', () {
+      final p = Parser()..register('minify', 'Minify output', type: bool);
+      p.parse(['minify=true']);
+      expect(p.getParsed()['minify'], isTrue);
+    });
+
+    test('wrong type for typed flag throws ArgParseException', () {
+      final p = Parser()..register('count', 'A count', type: int);
+      expect(
+        () => p.parse(['count=notanumber']),
+        throwsA(isA<ArgParseException>()),
+      );
+    });
+
+    test('typed flag with missing argument throws ArgParseException', () {
+      final p = Parser()..register('output', 'Output dir', type: String);
+      expect(() => p.parse(['output']), throwsA(isA<ArgParseException>()));
+    });
+
+    test('anyFlagsParsed is false before parsing', () {
+      final p = Parser()..register('--verbose', 'Verbose');
+      expect(p.anyFlagsParsed(), isFalse);
+    });
+
+    test('anyFlagsParsed is true after a flag is parsed', () {
+      final p = Parser()..register('--verbose', 'Verbose');
+      p.parse(['--verbose']);
+      expect(p.anyFlagsParsed(), isTrue);
+    });
+
+    test('-- allows unknown flags after it', () {
+      final p = Parser()..register('--known', 'A known flag');
+      expect(() => p.parse(['--', '--anything']), returnsNormally);
+    });
+
+    test('multiple flags parsed together', () {
+      final p = Parser()
+        ..register('--verbose', 'Verbose')
+        ..register('output', 'Output dir', type: String);
+      p.parse(['--verbose', 'output=dist']);
+      expect(p.getParsed()['--verbose'], isTrue);
+      expect(p.getParsed()['output'], equals('dist'));
+    });
+
+    test('getParsed returns empty map when nothing is parsed', () {
+      final p = Parser()..register('--verbose', 'Verbose');
+      p.parse([]);
+      expect(p.getParsed(), isEmpty);
+    });
+  });
 }

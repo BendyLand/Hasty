@@ -1,6 +1,6 @@
 name: hasty
 description: A SwiftUI-inspired static site generator for Dart. Build HTML with HStacks, VStacks, and zero CSS stress.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/BendyLand/Hasty
 
 environment:

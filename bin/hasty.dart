@@ -3,9 +3,9 @@ import 'package:hasty/hasty.dart';
 Node navBar() => header(
   children: [
     hStack(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         h1('My Blog', style: Style(color: Colors.teal)),
+        spacer(),
         nav(
           children: [
             hStack(
@@ -129,6 +129,33 @@ Node teamTable() => table(
   ],
 );
 
+Node intro() => padding(
+  all: 40,
+  child: center(
+    child: vStack(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      style: Style(gap: 8),
+      children: [
+        h2(
+          'Welcome to My Blog',
+          style: Style(color: Colors.darkGray, textAlign: TextAlign.center),
+        ),
+        p('Thoughts on Dart, Flutter, and building things on the web.'),
+        hStack(
+          style: Style(gap: 12),
+          children: [
+            span('Dart', style: Style(color: Colors.teal, fontWeight: FontWeight.semibold)),
+            span('·'),
+            span('Flutter', style: Style(color: Colors.indigo, fontWeight: FontWeight.semibold)),
+            span('·'),
+            span('Web', style: Style(color: Colors.blue, fontWeight: FontWeight.semibold)),
+          ],
+        ),
+      ],
+    ),
+  ),
+);
+
 void main() async {
   final page = vStack(
     style: Style(
@@ -141,6 +168,7 @@ void main() async {
     children: [
       navBar(),
       hr(),
+      intro(),
       section(
         id: 'posts',
         children: [
@@ -171,6 +199,5 @@ void main() async {
       ),
     ],
   );
-
-  await emit(page);
+  await emit(page, title: 'My Blog');
 }
