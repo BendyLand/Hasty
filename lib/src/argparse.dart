@@ -36,8 +36,7 @@ final class Parser {
         var temp = item.split("=");
         item = temp[0];
         val = temp[1];
-      }
-      else if (item.contains(":")) {
+      } else if (item.contains(":")) {
         var temp = item.split(":");
         item = temp[0];
         val = temp[1];
@@ -61,8 +60,7 @@ final class Parser {
             throw ArgParseException(
               "Unsupplied argument of type `${_types[item]}` for flag '$item'.",
             );
-          }
-          else {
+          } else {
             var next = args[i + 1];
             val = convertType(next, _types[item]!);
             if (val == null) {
@@ -73,8 +71,7 @@ final class Parser {
             _parsed[item] = val;
           }
           i++; // advance the idx for the consumed arg
-        }
-        else {
+        } else {
           _parsed[item] = (_types[item] == null && val == null) ? true : val;
         }
       }

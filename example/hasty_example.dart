@@ -39,7 +39,9 @@ Node hero() => padding(
           'Build HTML in pure Dart.',
           style: Style(color: Colors.darkGray, textAlign: TextAlign.center),
         ),
-        p('No templates. No raw strings. Just composable functions and type-safe styles.'),
+        p(
+          'No templates. No raw strings. Just composable functions and type-safe styles.',
+        ),
       ],
     ),
   ),
@@ -94,12 +96,42 @@ Node specsTable() => section(
         ),
         tbody(
           children: [
-            tr(children: [td(content: 'Layout primitives'), td(content: 'Yes')]),
-            tr(children: [td(content: 'Forms'), td(content: 'Yes')]),
-            tr(children: [td(content: 'Tables'), td(content: 'Yes')]),
-            tr(children: [td(content: 'HTML escaping'), td(content: 'Yes')]),
-            tr(children: [td(content: 'Prettified output'), td(content: 'Yes')]),
-            tr(children: [td(content: 'CLI arg parsing'), td(content: 'Yes')]),
+            tr(
+              children: [
+                td(content: 'Layout primitives'),
+                td(content: 'Yes'),
+              ],
+            ),
+            tr(
+              children: [
+                td(content: 'Forms'),
+                td(content: 'Yes'),
+              ],
+            ),
+            tr(
+              children: [
+                td(content: 'Tables'),
+                td(content: 'Yes'),
+              ],
+            ),
+            tr(
+              children: [
+                td(content: 'HTML escaping'),
+                td(content: 'Yes'),
+              ],
+            ),
+            tr(
+              children: [
+                td(content: 'Prettified output'),
+                td(content: 'Yes'),
+              ],
+            ),
+            tr(
+              children: [
+                td(content: 'CLI arg parsing'),
+                td(content: 'Yes'),
+              ],
+            ),
           ],
         ),
       ],
@@ -194,7 +226,8 @@ void main(List<String> args) async {
             children: [
               featureCard(
                 title: 'Composable',
-                body: 'Build pages like Flutter widgets using hStack, vStack, and zStack.',
+                body:
+                    'Build pages like Flutter widgets using hStack, vStack, and zStack.',
               ),
               featureCard(
                 title: 'Typed Styles',
@@ -202,17 +235,15 @@ void main(List<String> args) async {
               ),
               featureCard(
                 title: 'Complete HTML',
-                body: 'Forms, tables, lists, media — all covered out of the box.',
+                body:
+                    'Forms, tables, lists, media — all covered out of the box.',
               ),
             ],
           ),
         ],
       ),
       specsTable(),
-      section(
-        id: 'contact',
-        children: [h2('Contact'), contactForm()],
-      ),
+      section(id: 'contact', children: [h2('Contact'), contactForm()]),
       footer(
         style: Style(marginTop: 48, color: Colors.gray),
         children: [p('Built with Hasty.')],

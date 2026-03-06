@@ -39,8 +39,7 @@ void _generateLoop(Node node, StringBuffer htmlBuffer) {
   if (_voidElements.contains(node.tag)) return;
   if (node.content != null) {
     htmlBuffer.write(node.rawHtml ? node.content : _escapeHtml(node.content!));
-  }
-  else if (node.children != null) {
+  } else if (node.children != null) {
     for (var child in node.children!) {
       _generateLoop(child, htmlBuffer);
     }
@@ -75,7 +74,8 @@ Future<void> emit(
       '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
       if (title.isNotEmpty) '  <title>$title</title>',
     ];
-    final rawHtml = '''<!DOCTYPE html>
+    final rawHtml =
+        '''<!DOCTYPE html>
 <html lang="$lang">
 <head>
 ${headLines.join('\n')}

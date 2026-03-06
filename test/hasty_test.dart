@@ -567,9 +567,7 @@ void main() {
     });
 
     test('extra Style properties are merged in', () {
-      final html = renderHtml(
-        center(child: p('x'), style: Style(height: 100)),
-      );
+      final html = renderHtml(center(child: p('x'), style: Style(height: 100)));
       expect(html, contains('height: 100.0px'));
       expect(html, contains('justify-content: center'));
     });
