@@ -69,7 +69,7 @@ Node aboutSection() => section(
         li('Compose pages with hStack, vStack, zStack, and spacer'),
         li('Type-safe styles via Style and Colors — no raw CSS strings'),
         li('Full form, table, and list support'),
-        li('Built-in HTML escaping and prettified output via BeautifulSoup'),
+        li('Built-in HTML escaping and prettified output'),
       ],
     ),
   ],
