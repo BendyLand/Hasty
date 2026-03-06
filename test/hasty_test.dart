@@ -395,7 +395,7 @@ void main() {
 
     test('br has no closing tag', () {
       final html = renderHtml(br());
-      expect(html, equals('<br>'));
+      expect(html.trim(), equals('<br>'));
     });
   });
 

@@ -8,5 +8,5 @@ pubspec.lock
 # Development scripts
 fmt.sh
 lashfile
-*summary*
-*main*
+summary.txt
+main

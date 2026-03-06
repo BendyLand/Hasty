@@ -28,7 +28,7 @@
 ### Generator
 - Added `emit` — writes `index.html` to a configurable output directory; accepts `title`, `fileName`, `outputDir`, and `lang` parameters
 - `emit` produces a complete HTML document: `<!DOCTYPE html>`, `<html lang="...">`, `<meta charset="utf-8">`, and `<meta name="viewport">` are always included
-- `emit` prettifies output via `BeautifulSoup.prettify()` before writing — the resulting file is human-readable and well-indented
+- `emit` prettifies output with indented formatting before writing — the resulting file is human-readable and well-indented
 - `emit` uses `mason_logger` for a progress spinner during the build, with a green ✓ on success or red ✗ on failure
 - Added `renderHtml` — returns the raw HTML string for a node tree without writing any files
 
@@ -40,7 +40,12 @@
 - Added full test coverage for all layout functions (`hStack`, `vStack`, `zStack`, `spacer`, `padding`, `center`)
 - Added full test coverage for `Parser` (flag parsing, type coercion, all three separators, error cases, `--` passthrough)
 
+### Bug Fixes
+- Fixed malformed HTML output caused by `beautiful_soup_dart`'s `prettify()` re-parsing the generated HTML and scrambling tag nesting order
+- Replaced the post-processing step with indentation built directly into the generation loop — output is now correctly structured and well-indented
+
 ### Removed
+- Removed `beautiful_soup_dart` dependency; prettification is now handled natively
 - Removed unused `Node.css` field and the dead `cssSet` collection/write infrastructure that depended on it
 
 ### Examples

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'node.dart';
 
@@ -30,28 +29,39 @@ String _escapeHtml(String text) => text
 String _escapeAttr(String value) =>
     value.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
 
-void _generateLoop(Node node, StringBuffer htmlBuffer) {
+void _generateLoop(Node node, StringBuffer buf, int indent) {
   final attrString = node.attrs.entries
       .map((e) => ' ${e.key}="${_escapeAttr(e.value)}"')
       .join();
   final boolAttrString = node.boolAttrs.map((a) => ' $a').join();
-  htmlBuffer.write('<${node.tag}$attrString$boolAttrString>');
-  if (_voidElements.contains(node.tag)) return;
-  if (node.content != null) {
-    htmlBuffer.write(node.rawHtml ? node.content : _escapeHtml(node.content!));
-  } else if (node.children != null) {
-    for (var child in node.children!) {
-      _generateLoop(child, htmlBuffer);
-    }
+  final pad = '  ' * indent;
+
+  if (_voidElements.contains(node.tag)) {
+    buf.writeln('$pad<${node.tag}$attrString$boolAttrString>');
+    return;
   }
-  htmlBuffer.write('</${node.tag}>');
+
+  if (node.content != null) {
+    final content = node.rawHtml ? node.content! : _escapeHtml(node.content!);
+    buf.writeln(
+      '$pad<${node.tag}$attrString$boolAttrString>$content</${node.tag}>',
+    );
+  } else if (node.children != null && node.children!.isNotEmpty) {
+    buf.writeln('$pad<${node.tag}$attrString$boolAttrString>');
+    for (final child in node.children!) {
+      _generateLoop(child, buf, indent + 1);
+    }
+    buf.writeln('$pad</${node.tag}>');
+  } else {
+    buf.writeln('$pad<${node.tag}$attrString$boolAttrString></${node.tag}>');
+  }
 }
 
 /// Returns the raw HTML string for [root] without writing any files.
 String renderHtml(Node root) {
-  final htmlBuffer = StringBuffer();
-  _generateLoop(root, htmlBuffer);
-  return htmlBuffer.toString();
+  final buf = StringBuffer();
+  _generateLoop(root, buf, 0);
+  return buf.toString();
 }
 
 /// Emits the generated code from [root].
@@ -65,26 +75,25 @@ Future<void> emit(
   final logger = Logger();
   final progress = logger.progress('Building $fileName.html');
   try {
-    final htmlBuffer = StringBuffer();
-    _generateLoop(root, htmlBuffer);
+    final buf = StringBuffer();
+    _generateLoop(root, buf, 2);
+    final headLines = [
+      '    <meta charset="utf-8">',
+      '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      if (title.isNotEmpty) '    <title>$title</title>',
+    ];
+    final fullHtml =
+        '<!DOCTYPE html>\n'
+        '<html lang="$lang">\n'
+        '  <head>\n'
+        '${headLines.join('\n')}\n'
+        '  </head>\n'
+        '  <body>\n'
+        '${buf.toString().trimRight()}\n'
+        '  </body>\n'
+        '</html>\n';
     final dir = Directory(outputDir);
     if (!await dir.exists()) await dir.create(recursive: true);
-    final headLines = [
-      '  <meta charset="utf-8">',
-      '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
-      if (title.isNotEmpty) '  <title>$title</title>',
-    ];
-    final rawHtml =
-        '''<!DOCTYPE html>
-<html lang="$lang">
-<head>
-${headLines.join('\n')}
-</head>
-<body>
-${htmlBuffer.toString()}
-</body>
-</html>''';
-    final fullHtml = BeautifulSoup(rawHtml).prettify();
     await File('${dir.path}/$fileName.html').writeAsString(fullHtml);
     progress.complete('Generated $fileName.html → $outputDir');
   } catch (e) {
