@@ -144,11 +144,23 @@ Node intro() => padding(
         hStack(
           style: Style(gap: 12),
           children: [
-            span('Dart', style: Style(color: Colors.teal, fontWeight: FontWeight.semibold)),
+            span(
+              'Dart',
+              style: Style(color: Colors.teal, fontWeight: FontWeight.semibold),
+            ),
             span('·'),
-            span('Flutter', style: Style(color: Colors.indigo, fontWeight: FontWeight.semibold)),
+            span(
+              'Flutter',
+              style: Style(
+                color: Colors.indigo,
+                fontWeight: FontWeight.semibold,
+              ),
+            ),
             span('·'),
-            span('Web', style: Style(color: Colors.blue, fontWeight: FontWeight.semibold)),
+            span(
+              'Web',
+              style: Style(color: Colors.blue, fontWeight: FontWeight.semibold),
+            ),
           ],
         ),
       ],

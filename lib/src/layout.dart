@@ -107,8 +107,7 @@ Node padding({
   final parts = <String>[];
   if (all != null) {
     parts.add('padding: ${all}px');
-  }
-  else {
+  } else {
     if (vertical != null) {
       parts.add('padding-top: ${vertical}px');
       parts.add('padding-bottom: ${vertical}px');
