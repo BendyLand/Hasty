@@ -236,6 +236,99 @@ void main() {
       expect(html, contains('type="submit"'));
       expect(html, contains('</form>'));
     });
+
+    test('input renders data-* attributes', () {
+      final html = renderHtml(
+        input(
+          name: 'query',
+          data: {'controller': 'search', 'action': 'input->search#run'},
+        ),
+      );
+      expect(html, contains('data-controller="search"'));
+      expect(html, contains('data-action="input->search#run"'));
+    });
+
+    test('input with no data map emits no data-* attributes', () {
+      final html = renderHtml(input(name: 'q'));
+      expect(html, isNot(contains('data-')));
+    });
+
+    test('textarea renders data-* attributes', () {
+      final html = renderHtml(
+        textarea(name: 'notes', data: {'controller': 'autogrow'}),
+      );
+      expect(html, contains('data-controller="autogrow"'));
+    });
+
+    test('textarea with no data map emits no data-* attributes', () {
+      final html = renderHtml(textarea(name: 'bio'));
+      expect(html, isNot(contains('data-')));
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Button
+  // ---------------------------------------------------------------------------
+
+  group('button', () {
+    test('renders label and default type', () {
+      final html = renderHtml(button('Click me'));
+      expect(html, contains('>Click me<'));
+      expect(html, contains('type="button"'));
+    });
+
+    test('id is rendered', () {
+      final html = renderHtml(button('Go', id: 'go-btn'));
+      expect(html, contains('id="go-btn"'));
+    });
+
+    test('primary variant sets blue background and white text', () {
+      final html = renderHtml(button('Save', variant: ButtonVariant.primary));
+      expect(html, contains('background-color: #3b82f6'));
+      expect(html, contains('color: #ffffff'));
+    });
+
+    test('secondary variant sets lightGray background', () {
+      final html = renderHtml(button('Cancel', variant: ButtonVariant.secondary));
+      expect(html, contains('background-color: #d1d5db'));
+      expect(html, contains('color: #374151'));
+    });
+
+    test('floating variant sets rounded corners and blue border', () {
+      final html = renderHtml(button('Float', variant: ButtonVariant.floating));
+      expect(html, contains('border-radius: 24.0px'));
+      expect(html, contains('color: #3b82f6'));
+    });
+
+    test('variant style is extended by extra style', () {
+      final html = renderHtml(
+        button(
+          'Wide',
+          variant: ButtonVariant.primary,
+          style: Style(width: 200),
+        ),
+      );
+      expect(html, contains('background-color: #3b82f6'));
+      expect(html, contains('width: 200.0px'));
+    });
+
+    test('no variant renders without variant-specific styles', () {
+      final html = renderHtml(button('Plain'));
+      expect(html, isNot(contains('background-color')));
+    });
+
+    test('data-* attributes are rendered', () {
+      final html = renderHtml(
+        button('Open', data: {'action': 'open-modal', 'target': 'dialog'}),
+      );
+      expect(html, contains('data-action="open-modal"'));
+      expect(html, contains('data-target="dialog"'));
+    });
+
+    test('button with no data map emits no data-* attributes', () {
+      final html = renderHtml(button('Submit', type: 'submit'));
+      expect(html, isNot(contains('data-')));
+    });
   });
 
   // ---------------------------------------------------------------------------
@@ -570,6 +663,209 @@ void main() {
       final html = renderHtml(center(child: p('x'), style: Style(height: 100)));
       expect(html, contains('height: 100.0px'));
       expect(html, contains('justify-content: center'));
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // Components
+  // ---------------------------------------------------------------------------
+
+  group('navLink', () {
+    test('renders as an anchor with the correct href and label', () {
+      final html = renderHtml(navLink(label: 'Home', href: '/'));
+      expect(html, contains('<a'));
+      expect(html, contains('href="/"'));
+      expect(html, contains('>Home<'));
+    });
+
+    test('forwards classes and style', () {
+      final html = renderHtml(
+        navLink(
+          label: 'Docs',
+          href: '/docs',
+          classes: 'nav-item',
+          style: Style(fontWeight: FontWeight.bold),
+        ),
+      );
+      expect(html, contains('class="nav-item"'));
+      expect(html, contains('font-weight: 700'));
+    });
+  });
+
+  group('navBar', () {
+    test('renders as a <nav> element', () {
+      final html = renderHtml(navBar(links: []));
+      expect(html, contains('<nav'));
+      expect(html, contains('</nav>'));
+    });
+
+    test('has flex row layout', () {
+      final html = renderHtml(navBar(links: []));
+      expect(html, contains('display: flex'));
+      expect(html, contains('flex-direction: row'));
+      expect(html, contains('align-items: center'));
+    });
+
+    test('renders link children', () {
+      final html = renderHtml(
+        navBar(
+          links: [
+            navLink(label: 'About', href: '#about'),
+            navLink(label: 'Contact', href: '#contact'),
+          ],
+        ),
+      );
+      expect(html, contains('>About<'));
+      expect(html, contains('>Contact<'));
+      expect(html, contains('href="#about"'));
+      expect(html, contains('href="#contact"'));
+    });
+
+    test('id and classes are rendered', () {
+      final html = renderHtml(
+        navBar(links: [], id: 'main-nav', classes: 'site-nav'),
+      );
+      expect(html, contains('id="main-nav"'));
+      expect(html, contains('class="site-nav"'));
+    });
+
+    test('extra style is merged in', () {
+      final html = renderHtml(
+        navBar(links: [], style: Style(backgroundColor: Colors.darkGray)),
+      );
+      expect(html, contains('background-color: #374151'));
+      expect(html, contains('display: flex'));
+    });
+  });
+
+  group('card', () {
+    test('renders as a <div>', () {
+      final html = renderHtml(card());
+      expect(html, contains('<div'));
+      expect(html, contains('</div>'));
+    });
+
+    test('applies default padding and border-radius', () {
+      final html = renderHtml(card());
+      expect(html, contains('padding: 16.0px'));
+      expect(html, contains('border-radius: 8.0px'));
+    });
+
+    test('custom padding is applied', () {
+      final html = renderHtml(card(padding: 24));
+      expect(html, contains('padding: 24.0px'));
+    });
+
+    test('backgroundColor is applied', () {
+      final html = renderHtml(card(backgroundColor: Colors.blue));
+      expect(html, contains('background-color: #3b82f6'));
+    });
+
+    test('extra style is merged in', () {
+      final html = renderHtml(card(style: Style(maxWidth: 400)));
+      expect(html, contains('max-width: 400.0px'));
+      expect(html, contains('padding: 16.0px'));
+    });
+
+    test('renders children', () {
+      final html = renderHtml(card(children: [h2('Title'), p('Body')]));
+      expect(html, contains('<h2>Title</h2>'));
+      expect(html, contains('<p>Body</p>'));
+    });
+
+    test('id and classes are rendered', () {
+      final html = renderHtml(card(id: 'my-card', classes: 'feature'));
+      expect(html, contains('id="my-card"'));
+      expect(html, contains('class="feature"'));
+    });
+  });
+
+  group('badge', () {
+    test('renders as a <span>', () {
+      final html = renderHtml(badge('Active', color: Colors.green));
+      expect(html, contains('<span'));
+      expect(html, contains('</span>'));
+    });
+
+    test('renders label text', () {
+      final html = renderHtml(badge('Pending', color: Colors.yellow));
+      expect(html, contains('>Pending<'));
+    });
+
+    test('applies the provided color as background', () {
+      final html = renderHtml(badge('Error', color: Colors.red));
+      expect(html, contains('background-color: #ef4444'));
+    });
+
+    test('uses white text by default', () {
+      final html = renderHtml(badge('Info', color: Colors.blue));
+      expect(html, contains('color: #ffffff'));
+    });
+
+    test('is rendered inline (display: inline-block)', () {
+      final html = renderHtml(badge('Draft', color: Colors.gray));
+      expect(html, contains('display: inline-block'));
+    });
+
+    test('extra style is merged in', () {
+      final html = renderHtml(
+        badge('VIP', color: Colors.purple, style: Style(fontSize: 14)),
+      );
+      expect(html, contains('font-size: 14.0px'));
+      expect(html, contains('background-color: #a855f7'));
+    });
+  });
+
+  group('statCard', () {
+    test('renders icon text', () {
+      final html = renderHtml(
+        statCard(icon: '🚀', value: '99', label: 'Launches', color: Colors.indigo),
+      );
+      expect(html, contains('🚀'));
+    });
+
+    test('renders value text', () {
+      final html = renderHtml(
+        statCard(icon: '✅', value: '100%', label: 'Uptime', color: Colors.green),
+      );
+      expect(html, contains('100%'));
+    });
+
+    test('renders label text', () {
+      final html = renderHtml(
+        statCard(icon: '⚡', value: '42ms', label: 'Latency', color: Colors.teal),
+      );
+      expect(html, contains('Latency'));
+    });
+
+    test('applies the provided color as card background', () {
+      final html = renderHtml(
+        statCard(icon: '📦', value: '7', label: 'Packages', color: Colors.blue),
+      );
+      expect(html, contains('background-color: #3b82f6'));
+    });
+
+    test('uses card internally (has padding and border-radius)', () {
+      final html = renderHtml(
+        statCard(icon: '★', value: '5', label: 'Stars', color: Colors.yellow),
+      );
+      expect(html, contains('padding: 16.0px'));
+      expect(html, contains('border-radius: 8.0px'));
+    });
+
+    test('id and classes are forwarded to the card', () {
+      final html = renderHtml(
+        statCard(
+          icon: '★',
+          value: '1',
+          label: 'Star',
+          color: Colors.orange,
+          id: 'star-card',
+          classes: 'stat',
+        ),
+      );
+      expect(html, contains('id="star-card"'));
+      expect(html, contains('class="stat"'));
     });
   });
 
