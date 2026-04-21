@@ -1,3 +1,26 @@
+## 0.0.3
+
+### Components
+
+- Added `navBar` — a ready-made `<nav>` with flex-row layout and configurable gap; pairs with `navLink` for typed link items
+- Added `card` — a styled box container with `padding`, `borderRadius`, and optional `backgroundColor`
+- Added `badge` — an inline status chip with a `color` background, white text, and pill shape
+- Added `statCard` — a compound card that displays an icon, a large value string, and a caption label on a coloured background
+
+### Tags
+
+- Added `ButtonVariant` enum (`primary`, `secondary`, `floating`) — pass `variant:` to `button` for opinionated pre-built styles that can still be overridden with `style:`
+- Added `data` parameter to `button`, `input`, and `textarea` — accepts a `Map<String, String>` and renders each entry as a `data-*` attribute
+- `button` now accepts an `id` parameter
+
+### CLI / Argparse
+
+- Parser now handles `--output` as an explicit double-dash flag (in addition to the existing bare `output` form)
+
+### Tests
+
+- Expanded test suite to cover component rendering (`card`, `badge`, `statCard`, `navBar`), `ButtonVariant` style merging, and `data-*` attribute output
+
 ## 0.0.2
 
 ### Layout

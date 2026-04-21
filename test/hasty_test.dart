@@ -289,7 +289,9 @@ void main() {
     });
 
     test('secondary variant sets lightGray background', () {
-      final html = renderHtml(button('Cancel', variant: ButtonVariant.secondary));
+      final html = renderHtml(
+        button('Cancel', variant: ButtonVariant.secondary),
+      );
       expect(html, contains('background-color: #d1d5db'));
       expect(html, contains('color: #374151'));
     });
@@ -731,7 +733,10 @@ void main() {
 
     test('extra style is merged in', () {
       final html = renderHtml(
-        navBar(links: [], style: Style(backgroundColor: Colors.darkGray)),
+        navBar(
+          links: [],
+          style: Style(backgroundColor: Colors.darkGray),
+        ),
       );
       expect(html, contains('background-color: #374151'));
       expect(html, contains('display: flex'));
@@ -819,21 +824,36 @@ void main() {
   group('statCard', () {
     test('renders icon text', () {
       final html = renderHtml(
-        statCard(icon: '🚀', value: '99', label: 'Launches', color: Colors.indigo),
+        statCard(
+          icon: '🚀',
+          value: '99',
+          label: 'Launches',
+          color: Colors.indigo,
+        ),
       );
       expect(html, contains('🚀'));
     });
 
     test('renders value text', () {
       final html = renderHtml(
-        statCard(icon: '✅', value: '100%', label: 'Uptime', color: Colors.green),
+        statCard(
+          icon: '✅',
+          value: '100%',
+          label: 'Uptime',
+          color: Colors.green,
+        ),
       );
       expect(html, contains('100%'));
     });
 
     test('renders label text', () {
       final html = renderHtml(
-        statCard(icon: '⚡', value: '42ms', label: 'Latency', color: Colors.teal),
+        statCard(
+          icon: '⚡',
+          value: '42ms',
+          label: 'Latency',
+          color: Colors.teal,
+        ),
       );
       expect(html, contains('Latency'));
     });

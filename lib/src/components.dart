@@ -97,10 +97,7 @@ Node badge(
   return Node(
     tag: 'span',
     content: label,
-    attrs: {
-      'class': classes,
-      'style': _mergeStyle(base.inlineStyle, style),
-    },
+    attrs: {'class': classes, 'style': _mergeStyle(base.inlineStyle, style)},
   );
 }
 
@@ -127,10 +124,7 @@ Node statCard({
         style: Style(gap: 4),
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          text(
-            icon,
-            style: Style(fontSize: 28, textAlign: TextAlign.center),
-          ),
+          text(icon, style: Style(fontSize: 28, textAlign: TextAlign.center)),
           text(
             value,
             kind: TextKind.h3,
