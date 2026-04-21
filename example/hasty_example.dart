@@ -2,24 +2,20 @@ import 'dart:io';
 
 import 'package:hasty/hasty.dart';
 
-// spacer() between title and links — no need for MainAxisAlignment.spaceBetween
-Node navBar() => header(
+// navBar() / navLink()
+Node siteNav() => header(
   children: [
     hStack(
       children: [
         h1('Hasty', style: Style(color: Colors.indigo)),
         spacer(),
-        nav(
-          children: [
-            hStack(
-              style: Style(gap: 16),
-              children: [
-                a(href: '#about', content: 'About'),
-                a(href: '#features', content: 'Features'),
-                a(href: '#specs', content: 'Specs'),
-                a(href: '#contact', content: 'Contact'),
-              ],
-            ),
+        navBar(
+          links: [
+            navLink(label: 'About', href: '#about'),
+            navLink(label: 'Features', href: '#features'),
+            navLink(label: 'Components', href: '#components'),
+            navLink(label: 'Specs', href: '#specs'),
+            navLink(label: 'Contact', href: '#contact'),
           ],
         ),
       ],
@@ -47,18 +43,12 @@ Node hero() => padding(
   ),
 );
 
-Node featureCard({required String title, required String body}) => div(
-  classes: 'card',
-  style: Style(
-    border: '1px solid ${Colors.lightGray}',
-    borderRadius: 8,
-    padding: 16,
-    backgroundColor: Colors.white,
-  ),
+Node featureCard({required String title, required String body}) => card(
+  backgroundColor: Colors.white,
+  style: Style(border: '1px solid ${Colors.lightGray}'),
   children: [h3(title), p(body)],
 );
 
-// ul/li for a feature list
 Node aboutSection() => section(
   id: 'about',
   children: [
@@ -75,7 +65,6 @@ Node aboutSection() => section(
   ],
 );
 
-// table for a feature overview
 Node specsTable() => section(
   id: 'specs',
   children: [
@@ -139,6 +128,131 @@ Node specsTable() => section(
   ],
 );
 
+// button variants
+Node buttonShowcase() => section(
+  id: 'buttons',
+  children: [
+    h3('Buttons'),
+    hStack(
+      style: Style(gap: 12),
+      children: [
+        button('Primary', variant: ButtonVariant.primary),
+        button('Secondary', variant: ButtonVariant.secondary),
+        button(
+          'Floating',
+          variant: ButtonVariant.floating,
+          data: {'action': 'open-modal'},
+        ),
+        button(
+          'Custom',
+          style: Style(
+            backgroundColor: Colors.purple,
+            color: Colors.white,
+            padding: 10,
+            borderRadius: 6,
+          ),
+          data: {'action': 'custom-action'},
+        ),
+      ],
+    ),
+  ],
+);
+
+Node badgeShowcase() => section(
+  id: 'badges',
+  children: [
+    h3('Badges'),
+    hStack(
+      style: Style(gap: 8),
+      children: [
+        badge('Active', color: Colors.green),
+        badge('Pending', color: Colors.yellow),
+        badge('Error', color: Colors.red),
+        badge('Info', color: Colors.blue),
+        badge('Draft', color: Colors.gray),
+      ],
+    ),
+  ],
+);
+
+Node statCardShowcase() => section(
+  id: 'stat-cards',
+  children: [
+    h3('Stat Cards'),
+    hStack(
+      style: Style(gap: 16),
+      children: [
+        statCard(
+          icon: '🚀',
+          value: '128',
+          label: 'Deployments',
+          color: Colors.indigo,
+        ),
+        statCard(
+          icon: '✅',
+          value: '99.9%',
+          label: 'Uptime',
+          color: Colors.green,
+        ),
+        statCard(
+          icon: '⚡',
+          value: '42ms',
+          label: 'Avg. Response',
+          color: Colors.teal,
+        ),
+      ],
+    ),
+  ],
+);
+
+Node inputShowcase() => section(
+  id: 'inputs',
+  children: [
+    h3('Inputs'),
+    vStack(
+      style: Style(gap: 12),
+      children: [
+        vStack(
+          style: Style(gap: 4),
+          children: [
+            label(htmlFor: 'search', content: 'Search'),
+            input(
+              id: 'search',
+              name: 'search',
+              placeholder: 'Search...',
+              data: {'controller': 'search', 'action': 'input->search#query'},
+            ),
+          ],
+        ),
+        vStack(
+          style: Style(gap: 4),
+          children: [
+            label(htmlFor: 'notes', content: 'Notes'),
+            textarea(
+              id: 'notes',
+              name: 'notes',
+              placeholder: 'Add a note...',
+              rows: 3,
+              data: {'controller': 'autogrow'},
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);
+
+Node componentsSection() => section(
+  id: 'components',
+  children: [
+    h2('New Components'),
+    buttonShowcase(),
+    badgeShowcase(),
+    statCardShowcase(),
+    inputShowcase(),
+  ],
+);
+
 Node contactForm() => form(
   action: '/contact',
   method: 'post',
@@ -192,9 +306,9 @@ Node contactForm() => form(
 );
 
 void main(List<String> args) async {
-  // 1. Parse CLI args
   final parser = Parser();
   parser.register('output', 'The output directory', type: String);
+  parser.register('--output', 'The output directory', type: String);
   try {
     parser.parse(args);
   } catch (e) {
@@ -202,8 +316,6 @@ void main(List<String> args) async {
     exit(1);
   }
   final outDir = parser.getParsed()['output'] ?? 'build';
-
-  // 2. Build the page tree
   final page = vStack(
     id: 'app',
     style: Style(
@@ -213,10 +325,10 @@ void main(List<String> args) async {
       margin: 0,
     ),
     children: [
-      navBar(),
-      hr(),
+      siteNav(),
       hero(),
       aboutSection(),
+      componentsSection(),
       section(
         id: 'features',
         children: [
@@ -250,7 +362,6 @@ void main(List<String> args) async {
       ),
     ],
   );
-
-  // 3. Emit
   await emit(page, outputDir: outDir, title: 'Hasty Example');
 }
+

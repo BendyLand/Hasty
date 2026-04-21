@@ -179,7 +179,6 @@ void main() async {
     id: 'app',
     children: [
       navBar(),
-      hr(),
       intro(),
       section(
         id: 'posts',

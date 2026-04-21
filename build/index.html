@@ -3,51 +3,156 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>Hasty Example</title>
   </head>
   <body>
     <div id="app" style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 24.0px; margin: 0.0px; font-family: sans-serif; max-width: 800.0px">
       <header>
         <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
-          <h1 style="color: #14b8a6">My Blog</h1>
+          <h1 style="color: #6366f1">Hasty</h1>
           <div style="flex: 1"></div>
-          <nav>
-            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16.0px">
-              <a href="#posts">Posts</a>
-              <a href="#contact">Contact</a>
-              <a href="#team">Team</a>
-            </div>
+          <nav style="display: flex; flex-direction: row; align-items: center; gap: 16px">
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#components">Components</a>
+            <a href="#specs">Specs</a>
+            <a href="#contact">Contact</a>
           </nav>
         </div>
       </header>
-      <hr>
-      <div style="padding: 40.0px">
+      <div style="padding: 48.0px">
         <div style="display: flex; justify-content: center; align-items: center">
           <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8.0px">
-            <h2 style="color: #374151; text-align: center">Welcome to My Blog</h2>
-            <p>Thoughts on Dart, Flutter, and building things on the web.</p>
-            <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 12.0px">
-              <span style="color: #14b8a6; font-weight: 600">Dart</span>
-              <span>·</span>
-              <span style="color: #6366f1; font-weight: 600">Flutter</span>
-              <span>·</span>
-              <span style="color: #3b82f6; font-weight: 600">Web</span>
-            </div>
+            <h2 style="color: #374151; text-align: center">Build HTML in pure Dart.</h2>
+            <p>No templates. No raw strings. Just composable functions and type-safe styles.</p>
           </div>
         </div>
       </div>
-      <section id="posts">
-        <h2>Recent Posts</h2>
-        <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16.0px">
-          <div class="card" style="background-color: #ffffff; padding: 16.0px; border-radius: 8.0px; border: 1px solid #d1d5db">
-            <h3>Hello, Hasty!</h3>
-            <p>Getting started with a SwiftUI-inspired static site generator in Dart.</p>
+      <section id="about">
+        <h2>About</h2>
+        <p>Hasty is a SwiftUI-inspired static site generator for Dart.</p>
+        <ul>
+          <li>Compose pages with hStack, vStack, zStack, and spacer</li>
+          <li>Type-safe styles via Style and Colors — no raw CSS strings</li>
+          <li>Full form, table, and list support</li>
+          <li>Built-in HTML escaping and prettified output</li>
+        </ul>
+      </section>
+      <section id="components">
+        <h2>New Components</h2>
+        <section id="buttons">
+          <h3>Buttons</h3>
+          <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 12.0px">
+            <button type="button" style="color: #ffffff; background-color: #3b82f6; padding: 10.0px; font-weight: 600; border-radius: 6.0px">Primary</button>
+            <button type="button" style="color: #374151; background-color: #d1d5db; padding: 10.0px; border-radius: 6.0px">Secondary</button>
+            <button type="button" style="color: #3b82f6; background-color: #ffffff; padding: 10.0px; border-radius: 24.0px; border: 2px solid #3b82f6" data-action="open-modal">Floating</button>
+            <button type="button" style="color: #ffffff; background-color: #a855f7; padding: 10.0px; border-radius: 6.0px" data-action="custom-action">Custom</button>
           </div>
-          <div class="card" style="background-color: #ffffff; padding: 16.0px; border-radius: 8.0px; border: 1px solid #d1d5db">
-            <h3>Composing Layouts</h3>
-            <p>Use hStack, vStack, and spacer to build clean, flexible page structures.</p>
+        </section>
+        <section id="badges">
+          <h3>Badges</h3>
+          <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 8.0px">
+            <span style="color: #ffffff; background-color: #22c55e; padding-top: 3.0px; padding-right: 8.0px; padding-bottom: 3.0px; padding-left: 8.0px; font-size: 12.0px; font-weight: 600; border-radius: 12.0px; display: inline-block">Active</span>
+            <span style="color: #ffffff; background-color: #eab308; padding-top: 3.0px; padding-right: 8.0px; padding-bottom: 3.0px; padding-left: 8.0px; font-size: 12.0px; font-weight: 600; border-radius: 12.0px; display: inline-block">Pending</span>
+            <span style="color: #ffffff; background-color: #ef4444; padding-top: 3.0px; padding-right: 8.0px; padding-bottom: 3.0px; padding-left: 8.0px; font-size: 12.0px; font-weight: 600; border-radius: 12.0px; display: inline-block">Error</span>
+            <span style="color: #ffffff; background-color: #3b82f6; padding-top: 3.0px; padding-right: 8.0px; padding-bottom: 3.0px; padding-left: 8.0px; font-size: 12.0px; font-weight: 600; border-radius: 12.0px; display: inline-block">Info</span>
+            <span style="color: #ffffff; background-color: #6b7280; padding-top: 3.0px; padding-right: 8.0px; padding-bottom: 3.0px; padding-left: 8.0px; font-size: 12.0px; font-weight: 600; border-radius: 12.0px; display: inline-block">Draft</span>
+          </div>
+        </section>
+        <section id="stat-cards">
+          <h3>Stat Cards</h3>
+          <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16.0px">
+            <div style="background-color: #6366f1; padding: 16.0px; border-radius: 8.0px">
+              <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 4.0px">
+                <p style="font-size: 28.0px; text-align: center">🚀</p>
+                <h3 style="color: #ffffff; font-weight: 700; text-align: center">128</h3>
+                <small style="color: #ffffff; text-align: center">Deployments</small>
+              </div>
+            </div>
+            <div style="background-color: #22c55e; padding: 16.0px; border-radius: 8.0px">
+              <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 4.0px">
+                <p style="font-size: 28.0px; text-align: center">✅</p>
+                <h3 style="color: #ffffff; font-weight: 700; text-align: center">99.9%</h3>
+                <small style="color: #ffffff; text-align: center">Uptime</small>
+              </div>
+            </div>
+            <div style="background-color: #14b8a6; padding: 16.0px; border-radius: 8.0px">
+              <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 4.0px">
+                <p style="font-size: 28.0px; text-align: center">⚡</p>
+                <h3 style="color: #ffffff; font-weight: 700; text-align: center">42ms</h3>
+                <small style="color: #ffffff; text-align: center">Avg. Response</small>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="inputs">
+          <h3>Inputs</h3>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 12.0px">
+            <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 4.0px">
+              <label for="search">Search</label>
+              <input type="text" name="search" id="search" placeholder="Search..." data-controller="search" data-action="input->search#query">
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 4.0px">
+              <label for="notes">Notes</label>
+              <textarea name="notes" id="notes" placeholder="Add a note..." rows="3" data-controller="autogrow"></textarea>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section id="features">
+        <h2>Features</h2>
+        <div style="display: flex; flex-direction: row; justify-content: flex-start; align-items: center; gap: 16.0px">
+          <div style="background-color: #ffffff; padding: 16.0px; border-radius: 8.0px; border: 1px solid #d1d5db">
+            <h3>Composable</h3>
+            <p>Build pages like Flutter widgets using hStack, vStack, and zStack.</p>
+          </div>
+          <div style="background-color: #ffffff; padding: 16.0px; border-radius: 8.0px; border: 1px solid #d1d5db">
+            <h3>Typed Styles</h3>
+            <p>Use Style and Colors for type-safe inline CSS.</p>
+          </div>
+          <div style="background-color: #ffffff; padding: 16.0px; border-radius: 8.0px; border: 1px solid #d1d5db">
+            <h3>Complete HTML</h3>
+            <p>Forms, tables, lists, media — all covered out of the box.</p>
           </div>
         </div>
+      </section>
+      <section id="specs">
+        <h2>Specs</h2>
+        <table style="width: 500.0px">
+          <caption>Feature Overview</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Supported</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Layout primitives</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Forms</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Tables</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>HTML escaping</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Prettified output</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>CLI arg parsing</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
       </section>
       <section id="contact">
         <h2>Contact</h2>
@@ -68,36 +173,6 @@
             <button type="submit">Send</button>
           </div>
         </form>
-      </section>
-      <section id="team">
-        <h2>Team</h2>
-        <table style="width: 600.0px; border-color: #d1d5db; border-width: 1.0px">
-          <caption>Meet the team</caption>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Role</th>
-              <th scope="col">Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Alice</td>
-              <td>Engineer</td>
-              <td>Remote</td>
-            </tr>
-            <tr>
-              <td>Bob</td>
-              <td>Designer</td>
-              <td>New York</td>
-            </tr>
-            <tr>
-              <td>Carol</td>
-              <td>Product</td>
-              <td>London</td>
-            </tr>
-          </tbody>
-        </table>
       </section>
       <footer style="color: #6b7280; margin-top: 48.0px">
         <p>Built with Hasty.</p>
