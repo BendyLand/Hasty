@@ -364,4 +364,3 @@ void main(List<String> args) async {
   );
   await emit(page, outputDir: outDir, title: 'Hasty Example');
 }
-

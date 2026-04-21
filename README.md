@@ -8,7 +8,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  hasty: ^0.0.2
+  hasty: ^0.0.3
 ```
 
 Then run:
@@ -118,7 +118,18 @@ ul(children: [
 #### Links & Buttons
 ```dart
 a(href: 'https://example.com', content: 'Visit', target: '_blank')
+
+// plain button
 button('Submit', type: 'submit')
+
+// pre-styled variants
+button('Save', variant: ButtonVariant.primary)
+button('Cancel', variant: ButtonVariant.secondary)
+button('Floating', variant: ButtonVariant.floating)
+
+// data-* attributes (works on button, input, and textarea)
+button('Delete', variant: ButtonVariant.primary, data: {'confirm': 'true', 'id': '42'})
+// renders: <button data-confirm="true" data-id="42">Delete</button>
 ```
 
 #### Media
@@ -171,6 +182,55 @@ raw('<strong>bold</strong>')
 
 Never pass user-supplied data to `raw`.
 
+### Components
+
+High-level pre-styled components for common UI patterns.
+
+#### navBar / navLink
+
+```dart
+navBar(
+  links: [
+    navLink(label: 'Home', href: '/'),
+    navLink(label: 'About', href: '/about'),
+    navLink(label: 'Contact', href: '/contact'),
+  ],
+  style: Style(backgroundColor: Colors.indigo, padding: 16),
+)
+```
+
+#### card
+
+```dart
+card(
+  padding: 24,
+  backgroundColor: Colors.white,
+  children: [
+    h2('Feature Title'),
+    p('A short description of the feature.'),
+  ],
+)
+```
+
+#### badge
+
+```dart
+badge('New', color: Colors.green)
+badge('Deprecated', color: Colors.red)
+badge('Beta', color: Colors.indigo, style: Style(fontSize: 10))
+```
+
+#### statCard
+
+```dart
+statCard(
+  icon: '🚀',
+  value: '1,200',
+  label: 'Deploys this month',
+  color: Colors.teal,
+)
+```
+
 ### Emitting output
 
 ```dart
@@ -215,6 +275,6 @@ Flags can be passed as `output=public`, `output:public`, or `output public`.
 
 ## Full Example
 
-See [`example/hasty_example.dart`](example/hasty_example.dart) for a complete page demonstrating nav with `spacer`, a `padding`/`center` hero, a `ul`/`li` feature list, a specs table, a contact form, and CLI argument parsing.
+See [`example/hasty_example.dart`](example/hasty_example.dart) for a complete page demonstrating `navBar`, `card`, `badge`, `statCard`, `ButtonVariant`, `data-*` attributes, layout primitives, tables, forms, and CLI argument parsing.
 
-See [`bin/hasty.dart`](bin/hasty.dart) for a working blog layout that additionally shows inline text styling with `span` and `FontWeight`.
+See [`bin/hasty.dart`](bin/hasty.dart) for a working layout that shows inline text styling with `span` and `FontWeight`.
