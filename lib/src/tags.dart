@@ -201,6 +201,39 @@ Node li(String content, {Style? style, String? classes}) {
 
 // SECTION: Interactive
 
+enum ButtonVariant { primary, secondary, floating }
+
+Style _buttonVariantStyle(ButtonVariant v) => switch (v) {
+  ButtonVariant.primary => Style(
+    backgroundColor: Colors.blue,
+    color: Colors.white,
+    padding: 10,
+    borderRadius: 6,
+    fontWeight: FontWeight.semibold,
+  ),
+  ButtonVariant.secondary => Style(
+    backgroundColor: Colors.lightGray,
+    color: Colors.darkGray,
+    padding: 10,
+    borderRadius: 6,
+  ),
+  ButtonVariant.floating => Style(
+    backgroundColor: Colors.white,
+    color: Colors.blue,
+    padding: 10,
+    borderRadius: 24,
+    border: '2px solid ${Colors.blue}',
+  ),
+};
+
+String? _combineStyles(Style? a, Style? b) {
+  final parts = <String>[
+    if (a != null && a.inlineStyle.isNotEmpty) a.inlineStyle,
+    if (b != null && b.inlineStyle.isNotEmpty) b.inlineStyle,
+  ];
+  return parts.isEmpty ? null : parts.join('; ');
+}
+
 /// An anchor link.
 Node a({
   required String href,
@@ -221,15 +254,27 @@ Node a({
   );
 }
 
-/// A button.
-Node button(String label, {String? type, String? classes, Style? style}) {
+/// A button. Use [variant] for opinionated visual styles.
+/// Pass arbitrary data-* attributes via [data].
+Node button(
+  String label, {
+  String? id,
+  String? type,
+  String? classes,
+  Style? style,
+  ButtonVariant? variant,
+  Map<String, String> data = const {},
+}) {
+  final variantStyle = variant != null ? _buttonVariantStyle(variant) : null;
   return Node(
     tag: 'button',
     content: label,
     attrs: {
       'type': type ?? 'button',
+      'id': id,
       'class': classes,
-      'style': _styleAttr(style),
+      'style': _combineStyles(variantStyle, style),
+      for (final e in data.entries) 'data-${e.key}': e.value,
     },
   );
 }
@@ -288,6 +333,7 @@ Node form({
 }
 
 /// A form input (void element — no children).
+/// Pass arbitrary data-* attributes via [data].
 Node input({
   String type = 'text',
   String? name,
@@ -305,6 +351,7 @@ Node input({
   bool disabled = false,
   bool readonly = false,
   bool checked = false,
+  Map<String, String> data = const {},
 }) {
   return Node(
     tag: 'input',
@@ -321,6 +368,7 @@ Node input({
       'accept': accept,
       'class': classes,
       'style': _styleAttr(style),
+      for (final e in data.entries) 'data-${e.key}': e.value,
     },
     boolAttrs: [
       if (required) 'required',
@@ -332,6 +380,7 @@ Node input({
 }
 
 /// A multi-line text input.
+/// Pass arbitrary data-* attributes via [data].
 Node textarea({
   String? name,
   String? id,
@@ -344,6 +393,7 @@ Node textarea({
   bool required = false,
   bool disabled = false,
   bool readonly = false,
+  Map<String, String> data = const {},
 }) {
   return Node(
     tag: 'textarea',
@@ -356,6 +406,7 @@ Node textarea({
       'cols': cols?.toString(),
       'class': classes,
       'style': _styleAttr(style),
+      for (final e in data.entries) 'data-${e.key}': e.value,
     },
     boolAttrs: [
       if (required) 'required',
