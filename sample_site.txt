@@ -1,0 +1,1236 @@
+- index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bland Logic LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div class="shell">
+  <!-- sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Bland Logic LLC logo" id="logo">
+      <div class="brand-text">
+        <div class="name">blandlogic</div>
+        <div class="tagline">personal site</div>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Sections</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#" data-tab="about" class="active">about</a></li>
+        <li><a href="#" data-tab="projects">projects</a></li>
+        <li><a href="#" data-tab="writing">writing</a></li>
+        <li><a href="#" data-tab="misc">misc</a></li>
+        <li><a href="#" data-tab="contact">contact</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">On this page</div>
+      <ul class="sidebar-nav" id="toc"></ul>
+    </div>
+    <div class="sidebar-footer">
+      <a href="https://ko-fi.com/bendyland">Ko-fi</a>
+      <a href="https://www.upwork.com/freelancers/~01256bcc2c84ffce62?mp_source=share">Upwork</a>
+      <a href="https://www.github.com/BendyLand">Github</a>
+      <a href="https://www.youtube.com/@BlandLogic">YouTube</a>
+      <button class="sidebar-privacy-link" id="privacy-open">Privacy Policy</button>
+      <div class="sidebar-copyright">&copy; 2026 Bland Logic LLC</div>
+    </div>
+  </aside>
+  <!-- mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <!-- header -->
+  <header class="header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="header-left">
+      <div class="breadcrumb">
+        blandlogic <span>/</span> <span id="breadcrumb-page">about</span>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="about">About</button>
+      <button class="tab" data-tab="projects">Projects</button>
+      <button class="tab" data-tab="writing">Writing</button>
+      <button class="tab" data-tab="misc">Misc</button>
+      <button class="tab" data-tab="contact">Contact</button>
+    </nav>
+  </header>
+  <!-- main -->
+  <main class="main">
+    <section class="tab-panel active" id="panel-about">
+      <h1 class="panel-title">About me</h1>
+      <div class="panel-meta">Last updated — April 2026</div>
+      <div class="panel-body">
+        <p>
+          Hi — I'm <a href="#" class="hl" onclick="switchTab('contact');return false;">Ben</a>,<br>
+          I have a degree in music education, I used to be a teacher, and now I write programs.
+        </p>
+        <p>
+          In my free time, I build things that are <em>quietly useful</em>.
+          Tools that you forget that you use until you miss them.
+          I also like to play around with game development every now and then.
+        </p>
+        <p>
+          This site is a portfolio, a brand, and a blog all in one.<br>
+          Nothing is final. Everything is honest.
+        </p>
+      </div>
+    </section>
+    <section class="tab-panel" id="panel-projects">
+      <h1 class="panel-title">Projects</h1>
+      <div class="panel-meta">Things I'm building</div>
+      <div class="card-grid">
+        <a href="https://pub.dev/packages/hasty" class="card-link">
+        <div class="card">
+          <div class="card-title">Hasty</div>
+          <div class="card-desc">A SwiftUI-inspired static site generator for Dart. Build HTML with HStacks, VStacks, and zero CSS stress!</div>
+          <span class="card-tag">web</span>
+          <span class="card-tag">library</span>
+        </div>
+        </a>
+        <div class="card" id="offline-games-card" style="cursor:pointer">
+          <div class="card-title">Offline Games</div>
+          <div class="card-desc">A collection of 10 games that can be played completely offline!</div>
+          <span class="card-tag">mobile</span>
+          <span class="card-tag">game</span>
+        </div>
+      </div>
+      <div class="panel-meta">Things I've built</div>
+      <div class="card-grid">
+        <a href="https://github.com/BendyLand/zclip" class="card-link">
+        <div class="card">
+          <div class="card-title">zclip</div>
+          <div class="card-desc">A clipboard manager daemon for X11 Linux. Store multiple strings, retrieve old ones, and even save them to a SQLite db for later use (can be read back into the daemon or used directly)!</div>
+          <span class="card-tag">systems</span>
+          <span class="card-tag">tool</span>
+        </div>
+        </a>
+        <a href="https://github.com/BendyLand/Lash" class="card-link">
+        <div class="card">
+          <div class="card-title">Lash</div>
+          <div class="card-desc">Labeled Bash. Like 'make' with no custom syntax, or 'just' as a much smaller binary!</div>
+          <span class="card-tag">systems</span>
+          <span class="card-tag">tool</span>
+        </div>
+        </a>
+      </div>
+    </section>
+    <section class="tab-panel" id="panel-writing">
+      <h1 class="panel-title">Writing</h1>
+      <div class="panel-meta">Notes, essays, and half-formed thoughts</div>
+      <ul class="post-list" id="post-list"></ul>
+    </section>
+    <section class="tab-panel" id="panel-misc">
+      <h1 class="panel-title">Miscellaneous</h1>
+      <div class="panel-meta">Equipment &amp; tools</div>
+      <ul class="post-list misc-list">
+        <li class="post-item">
+          <span class="post-date">Primary OS</span>
+          <span class="misc-value">Pop!_OS 22.04 LTS</span>
+        </li>
+        <li class="post-item">
+          <span class="post-date">Display Protocol</span>
+          <span class="misc-value">X11</span>
+        </li>
+        <li class="post-item">
+          <span class="post-date">Editor</span>
+          <span class="misc-value">Helix (<a href="https://github.com/bendyland/helix">customized</a>)</span>
+        </li>
+        <li class="post-item">
+          <span class="post-date">Session Manager</span>
+          <span class="misc-value">Tmux (<a href="https://github.com/bendyland/tmux">customized</a>)</span>
+        </li>
+        <li class="post-item">
+          <span class="post-date">Terminal Emulator</span>
+          <span class="misc-value">Kitty</span>
+        </li>
+      </ul>
+      <!-- <div class="panel-meta">Fun facts</div> -->
+      <!-- <div class="panel-body"> -->
+        <!-- <p>Coming soon.</p> -->
+      <!-- </div> -->
+    </section>
+    <section class="tab-panel" id="panel-contact">
+      <h1 class="panel-title">Contact</h1>
+      <div class="panel-meta">Get in touch</div>
+      <div class="panel-body">
+        <p>
+          The best way to reach me is by <a href="mailto:contact@blandlogic.com">email</a>.
+        </p>
+        <p>
+          For business inquiries, I recommend using <a href="https://www.upwork.com/freelancers/~01256bcc2c84ffce62?mp_source=share">Upwork</a>.
+        </p>
+        <p>
+          I'm also reachable on <a href="https://www.github.com/BendyLand">GitHub</a> and occasionally
+          on <a href="https://www.youtube.com/@BlandLogic">YouTube</a>. I don't respond quickly but I do
+          respond eventually.
+        </p>
+        <p>
+          If you like what I do and feel like backing my work, <a href="https://ko-fi.com/bendyland">Ko-fi</a> is the place to go.
+          Your support is greatly appreciated and allows me to provide my services with total independence. 
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+<!-- privacy policy modal -->
+<div class="modal-backdrop" id="privacy-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <button class="modal-close" id="privacy-close" aria-label="Close">&times;</button>
+    <div class="modal-title">Privacy Policy.</div>
+    <div class="modal-body">
+      <p>Bland Logic LLC built this site as a static entity. We do not collect, store, or share any personal data from visitors.</p>
+      <p style="margin-top:12px;">Any data processed is handled by our hosting provider (e.g., Porkbun) for standard server operations such as access logs. We have no control over and no access to that data.</p>
+      <p style="margin-top:12px;">If you have questions, contact us at <a href="mailto:contact@blandlogic.com" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);">contact@blandlogic.com</a>.</p>
+    </div>
+  </div>
+</div>
+<!-- article modal -->
+<div class="modal-backdrop" id="article-modal">
+  <div class="modal modal--article" role="dialog" aria-modal="true" aria-labelledby="article-modal-title">
+    <button class="modal-close" id="article-close" aria-label="Close">&times;</button>
+    <div class="modal-title" id="article-modal-title"></div>
+    <div class="modal-body article-body" id="article-modal-body"></div>
+  </div>
+</div>
+<!-- offline games modal -->
+<div class="modal-backdrop" id="offline-games-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="offline-games-modal-title">
+    <button class="modal-close" id="offline-games-close" aria-label="Close">&times;</button>
+    <div class="modal-title" id="offline-games-modal-title">Unreleased.</div>
+    <div class="modal-body">
+      <p>Offline Games is still in development. Check back soon!</p>
+    </div>
+  </div>
+</div>
+<script src="./app.js" defer></script>
+</body>
+</html>
+
+- style.css
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #363636;
+  --surface:    #3d3d3d;
+  --border:     rgba(255, 27, 255, 0.65);
+  --border-mid: rgba(255, 27, 255, 0.30);
+  --text:       #ccc8c0;
+  --text-dim:   #aaa396;
+  --text-faint: #87766e;
+  --accent:     #ff1bff;
+  --label:      #1bc0ff;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --sidebar-w: 200px;
+  --header-h:  60px;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* layout shell */
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: var(--header-h) 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  min-height: 100vh;
+}
+
+/* sidebar */
+
+.sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 0 24px 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  height: 36px; 
+  width: 36px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column; 
+  line-height: 1.2;       
+  padding-left: clamp(10px, 1.5vw, 15px);
+}
+
+.sidebar-brand .name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.sidebar-brand .tagline {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.sidebar-section {
+  padding: 0 24px;
+  margin-bottom: 28px;
+}
+
+.sidebar-label {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+li {
+  color: var(--text-dim);
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 5px 8px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 2px;
+  transition: color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.sidebar-nav a.active {
+  color: var(--accent);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 0 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.sidebar-footer a {
+  display: block;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 11px;
+  line-height: 2;
+  transition: color 0.15s;
+  text-align: center;
+}
+
+.sidebar-footer a:hover { color: var(--accent); }
+
+.sidebar-copyright {
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.sidebar-privacy-link {
+  display: block;
+  font-size: 10px;
+  color: var(--text-faint);
+  text-decoration: none;
+  margin-top: 16px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  transition: color 0.15s, border-color 0.15s;
+  background: none;
+  border: 1px solid var(--border-mid);
+  border-radius: 2px;
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+.sidebar-privacy-link:hover {
+  color: var(--text-dim);
+  border-color: var(--text-faint);
+}
+
+/* privacy modal */
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  padding: 32px;
+  max-width: 480px;
+  width: calc(100% - 48px);
+  position: relative;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.modal-body {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  transition: color 0.15s;
+}
+
+.modal-close:hover { color: var(--text); }
+
+/* header and tabs */
+
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  gap: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.breadcrumb {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.breadcrumb span { color: var(--text-faint); margin: 0 6px; }
+
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.tab:hover { color: var(--text); }
+
+.tab.active {
+  color: var(--accent);
+  background: var(--surface);
+}
+
+/* main content */
+
+.main {
+  grid-area: main;
+  padding: 40px 48px;
+  max-width: 760px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* panel headings */
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.panel-meta {
+  font-size: 14px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  margin-top: 32px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-body {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.85;
+  max-width: 560px;
+}
+
+.panel-body p + p { margin-top: 16px; }
+
+.panel-body a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-dim);
+  transition: border-color 0.15s;
+}
+
+.panel-body a:hover { border-bottom-color: var(--accent); }
+
+/* grid cards for projects */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 24px;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.card {
+  background: var(--bg);
+  padding: 20px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.card-link {
+  display: contents;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover { background: var(--surface); }
+
+.card-title {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--label);
+  border: 1px solid var(--label);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* writing list */
+.post-list {
+  list-style: none;
+  margin-top: 24px;
+}
+
+.post-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.post-date {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.post-title {
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.post-title:hover { color: var(--accent); }
+
+.misc-list .post-item {
+  grid-template-columns: 120px 1fr;
+}
+
+.misc-value {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.misc-value a {
+  color: var(--accent);
+}
+
+/* article modal */
+.modal--article {
+  max-width: 680px;
+  width: calc(100% - 48px);
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal--article .modal-title {
+  flex-shrink: 0;
+}
+
+.modal--article .modal-body {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-mid) transparent;
+}
+
+/* rendered markdown prose */
+.article-body {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.85;
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.15;
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.article-body h1 { font-size: 36px; margin-top: 0; }
+.article-body h2 { font-size: 26px; }
+.article-body h3 { font-size: 20px; }
+
+.article-body p { margin-top: 14px; }
+.article-body p:first-child { margin-top: 0; }
+
+.article-body a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 27, 255, 0.35);
+  transition: border-color 0.15s;
+}
+
+.article-body a:hover { border-bottom-color: var(--accent); }
+
+.article-body ul,
+.article-body ol {
+  padding-left: 20px;
+  margin-top: 14px;
+}
+
+.article-body li { margin-top: 4px; }
+
+.article-body blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 16px;
+  margin: 16px 0;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.article-body code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--surface);
+  padding: 1px 5px;
+  border-radius: 2px;
+  color: var(--label);
+}
+
+.article-body pre {
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  padding: 16px;
+  overflow-x: auto;
+  margin-top: 16px;
+  border-radius: 2px;
+}
+
+.article-body pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+.article-body em { color: var(--text-dim); }
+
+/* accent highlight */
+.hl { color: var(--accent); }
+
+/* hamburger; hidden on desktop */
+.hamburger {
+  display: none;
+}
+
+/* sidebar overlay; hidden on desktop */
+.sidebar-overlay {
+  display: none;
+}
+
+/* fade-in on panel switch */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tab-panel.active {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  /* single-column layout */
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-h) 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  /* sidebar becomes a fixed off-canvas drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    /* keep sticky/overflow from desktop intact */
+    grid-area: unset;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* dim overlay behind the open sidebar */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 40;
+    display: none;
+  }
+
+  .sidebar-overlay.open {
+    display: block;
+  }
+
+  /* header adjustments */
+  .header {
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--bg);
+  }
+
+  /* show hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    align-self: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-right: 10px;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: var(--text-dim);
+    transition: background 0.15s, transform 0.2s, opacity 0.2s;
+    transform-origin: center;
+  }
+
+  /* animate hamburger -> X when open */
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .hamburger:hover span { background: var(--text); }
+
+  /* hide header tab row; sidebar nav handles navigation */
+  .tabs { display: none; }
+
+  /* main content */
+  .main {
+    padding: 28px 20px;
+    max-width: 100%;
+  }
+
+  .panel-title {
+    font-size: 36px;
+  }
+
+  .panel-meta {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-body {
+    max-width: 100%;
+  }
+
+  /* project cards — full width, stacked */
+  .card-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  /* writing list — tighten date column on small screens */
+  .post-item {
+    grid-template-columns: 76px 1fr;
+    gap: 10px;
+  }
+
+  /* modal fits the screen */
+  .modal {
+    width: calc(100% - 32px);
+    padding: 24px;
+  }
+
+  .modal--article {
+    max-height: 88vh;
+  }
+}
+
+// app.js
+/* posts data 
+ * Each entry needs either:
+ *   src     - path to a standalone .md file (fetched at read time)
+ *   content - inline markdown string
+ **/
+var POSTS = [
+  {
+    date: "2023-08-09",
+    title: "Nothing to it, but to do it",
+    src: "./posts/nothing-to-it.md"
+  },
+  {
+    date: "2024-01-20",
+    title: "Practice Project: Entertainment Recommendation Software",
+    src: "./posts/entertainment-recommendation.md"
+  }
+];
+/* markdown renderer */
+function renderMarkdown(md) {
+  return marked.parse(md);
+}
+/* article loader (accepts a POSTS entry) */
+function loadArticle(post) {
+  if (post.content) {
+    openArticleModal(post.title, renderMarkdown(post.content));
+    return;
+  }
+  fetch(post.src)
+    .then(function(r) {
+      if (!r.ok) throw new Error("Failed to load " + post.src);
+      return r.text();
+    })
+    .then(function(md) {
+      openArticleModal(post.title, renderMarkdown(md));
+    })
+    .catch(function(err) {
+      openArticleModal(post.title, "<p style=\"color:var(--accent)\">" + err.message + "</p>");
+    });
+}
+/* article modal */
+var articleModal = document.getElementById("article-modal");
+var articleModalTitle = document.getElementById("article-modal-title");
+var articleModalBody = document.getElementById("article-modal-body");
+function openArticleModal(title, html) {
+  // NOTE: uncomment if you would prefer to have a pinned title up top;
+  //       will also need to update MD files.
+  // articleModalTitle.textContent = title;
+  articleModalBody.innerHTML = html;
+  articleModalBody.scrollTop = 0;
+  articleModal.classList.add("open");
+}
+function closeArticleModal() {
+  articleModal.classList.remove("open");
+}
+document.getElementById("article-close").addEventListener("click", closeArticleModal);
+articleModal.addEventListener("click", function(e) {
+  if (e.target === articleModal) closeArticleModal();
+});
+/* post list renderer */
+function renderPosts() {
+  var list = document.getElementById("post-list");
+  list.innerHTML = "";
+  POSTS.forEach(function(post, i) {
+    var li = document.createElement("li");
+    li.className = "post-item";
+    if (!li.id) li.id = "post-" + i;
+
+    var dateSpan = document.createElement("span");
+    dateSpan.className = "post-date";
+    dateSpan.textContent = post.date;
+
+    var titleSpan = document.createElement("span");
+    titleSpan.className = "post-title";
+    titleSpan.textContent = post.title;
+    titleSpan.addEventListener("click", function() { loadArticle(post); });
+
+    li.appendChild(dateSpan);
+    li.appendChild(titleSpan);
+    list.appendChild(li);
+  });
+}
+/* tab / toc */
+var tabs = document.querySelectorAll(".tab");
+var panels = document.querySelectorAll(".tab-panel");
+var sidebarLinks = document.querySelectorAll("#sidebar-nav a");
+var breadcrumb = document.getElementById("breadcrumb-page");
+function updateToc(panelId) {
+  var panel = document.getElementById("panel-" + panelId);
+  var toc = document.getElementById("toc");
+  toc.innerHTML = "";
+  var items = [];
+  if (panelId === "writing") {
+    panel.querySelectorAll(".post-item").forEach(function(item, i) {
+      if (!item.id) item.id = "post-" + i;
+      var date = item.querySelector(".post-date");
+      items.push({ label: date.textContent.trim(), target: item });
+    });
+  }
+  else if (panelId === "contact") {
+    panel.querySelectorAll(".panel-body a").forEach(function(link) {
+      items.push({ label: link.textContent.trim(), href: link.href });
+    });
+  }
+  else {
+    panel.querySelectorAll(".panel-meta").forEach(function(meta, i) {
+      if (!meta.id) meta.id = panelId + "-section-" + i;
+      items.push({ label: meta.textContent.trim(), target: meta });
+    });
+  }
+  items.forEach(function(item) {
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    if (item.href) {
+      a.href = item.href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
+    else {
+      a.href = "#" + item.target.id;
+      a.addEventListener("click", function(e) {
+        e.preventDefault();
+        item.target.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+    a.textContent = item.label;
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+}
+function switchTab(name) {
+  tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === name));
+  panels.forEach((p) => p.classList.toggle("active", p.id === `panel-${name}`));
+  sidebarLinks.forEach((a) => a.classList.toggle("active", a.dataset.tab === name));
+  breadcrumb.textContent = name;
+  updateToc(name);
+}
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+});
+sidebarLinks.forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    switchTab(a.dataset.tab);
+  });
+});
+/* privacy modal */
+var privacyModal = document.getElementById("privacy-modal");
+document.getElementById("privacy-open").addEventListener("click", () => {
+  privacyModal.classList.add("open");
+});
+document.getElementById("privacy-close").addEventListener("click", () => {
+  privacyModal.classList.remove("open");
+});
+privacyModal.addEventListener("click", (e) => {
+  if (e.target === privacyModal) privacyModal.classList.remove("open");
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    privacyModal.classList.remove("open");
+    closeArticleModal();
+    offlineGamesModal.classList.remove("open");
+    closeSidebar();
+  }
+});
+/* mobile sidebar */
+var hamburger = document.getElementById("hamburger");
+var sidebar = document.querySelector(".sidebar");
+var sidebarOverlay = document.getElementById("sidebar-overlay");
+function openSidebar() {
+  sidebar.classList.add("open");
+  sidebarOverlay.classList.add("open");
+  hamburger.classList.add("open");
+  hamburger.setAttribute("aria-label", "Close menu");
+}
+function closeSidebar() {
+  sidebar.classList.remove("open");
+  sidebarOverlay.classList.remove("open");
+  hamburger.classList.remove("open");
+  hamburger.setAttribute("aria-label", "Open menu");
+}
+hamburger.addEventListener("click", () => {
+  if (sidebar.classList.contains("open")) closeSidebar();
+  else openSidebar();
+});
+sidebarOverlay.addEventListener("click", closeSidebar);
+sidebarLinks.forEach((a) => {
+  a.addEventListener("click", () => {
+    if (window.innerWidth <= 768) closeSidebar();
+  });
+});
+/* offline games modal */
+var offlineGamesModal = document.getElementById("offline-games-modal");
+document.getElementById("offline-games-card").addEventListener("click", () => {
+  offlineGamesModal.classList.add("open");
+});
+document.getElementById("offline-games-close").addEventListener("click", () => {
+  offlineGamesModal.classList.remove("open");
+});
+offlineGamesModal.addEventListener("click", (e) => {
+  if (e.target === offlineGamesModal) offlineGamesModal.classList.remove("open");
+});
+/* init */
+renderPosts();
+updateToc("about");
+
+- entertainment-recommendation.md
+# Practice Project: Entertainment Recommendation Software
+
+_(This post was written as part of an assignment for the Computer Science Career Path from Codecademy.com)_
+
+## Background
+For the past few months, I have been working through various resources to help me transition into a career in software development. Of course, as part of this learning, I have written small programs here and there, along with a couple larger portfolio projects. I made a post about my first portfolio project, and now it's time once again to share with the class. The task for this project was to create a recommendation software for a topic of my choice. 
+
+## Brainstorming
+I'll be the first to admit that brainstorming topics is not my strong suit. When given the choice, I would much prefer to figure out how to implement an existing idea, rather than to think up the idea myself. I knew that I needed to choose a topic that I could easily break into various categories, otherwise I'd probably constantly feel the need to restart from the ground up. 
+
+I decided that a good way to think of something might be to try thinking of times where _I_ am most indecisive and would most appreciate a good recommendation. For me, this definitely meant finding some kind of media to consume. I don't know why, but for some reason, whenever I have the chance to relax and find something enjoyable to watch/listen to, I can never think of anything. I usually have to leave it up to various websites' recommendations for new content to consume. I think I've found my topic!
+
+## The Project
+([Follow along on GitHub!](https://github.com/BendyLand/entertainment-recommendation-software)) 
+All right, so we're going to make a recommendation system for media, but what does that actually mean? What kind of media should I focus on? What kinds of things can you ask the user to narrow down their options? How is that going to boil down to a concise recommendation for the user? In order to start my project, I needed to have answers to these questions. 
+
+My plan for the user interaction was simple: 
+1. User is bored.
+2. User uses recommendation software.
+3. User gets ideas for media to consume.
+
+This means that I needed to have some kind of collection of different forms of media; I settled on including movies, tv shows, video games, and songs.  
+
+I also needed to figure out different ways to group these different forms of media. To do this, I needed to look at characteristics of the media that are not super apparent at face value: release date, genre(s), and length (movies in minutes, tv shows in # of episodes, games in hours, and songs in seconds). Some planning and trail-and-error later, and I had a working prototype: users would be greeted with welcome message and an introductory selection to start the process of narrowing down the media.
+
+![Entertainment recommendation system welcome message](./posts/assets/photo.webp)
+
+The basic roadmap of all of the paths is roughly the same. The user starts by selecting a form of media that they want to focus on. If the user doesn't know which type of media they want (they _are_ here to get entertainment recommendations, after all), they have two additional options: "Not sure" and "Surprise me!". The latter simply chooses one of the media types at random, then proceeds as if the user had entered it. The former, however, begins a unique path, which returns the most extensive collection of media. 
+
+In step two, no matter what they chose previously, the user will start to narrow down their options by selecting their favorite metric. This time, they do not have an "unsure" choice, but they still get the option to have the program choose one for them at random. There is one more question for the user, which will look slightly (or very) different depending on which metric they chose. 
+
+Essentially, I need the user to split the metric somehow. For length and release date, this meant selecting from their extremities (shortest/longest, oldest/newest), and for genre this meant selecting a single genre, which the program could then use to select media based on related genres. No matter what the user chose previously, once they get through this step, the **entire** collection of media is filtered by the given metrics. 
+
+At this point, we have a filtered collection of our entire selection of media based on the user's metric choice. Now we need to decide which media to return to them. Luckily, they already told us what they wanted at the beginning! The user will end up with the filtered collection of whichever media type they chose. In the case that they chose the "unsure" option at the beginning, they would receive a filtered collection from _all_ of the media types. 
+
+## What Could Be Improved?
+A lot. But I had to keep my expectations realistic. This was one project from one course I was working through. As I mentioned, I am currently trying to transition my career into software development. While this project was an important portfolio project for this one course, I see it as more of a practice portfolio project in my overall journey to jump careers. With that out of the way, let's get into the areas that I feel could be improved had I given them a bit more attention.
+
+### Standardization
+I gathered most of the information surrounding the media simply by searching around for manually. Therefore, there is bound to be some inconsistency, whether due to input errors when entering the information or simply due to subjectivity. For example, classifying media by genre can be done to a certain extent objectively, but when you start doing so across multiple media forms, sometimes the difference between genres like "action" and "action-adventure" becomes less clear. To mitigate some of the complexity caused by this, wherever possible, these situations were simplified (so the two genres from the example would both be classified as "action-adventure", even if that's not technically what they both are). 
+
+### Storage
+I couldn't even tell you what data structure the media is stored in (okay maybe that isn't true, but it's still not super well designed, which is more important). Technically, they're stored in Python dictionaries, but the different forms of media are stored in different dictionary variables. To keep track of those, the dictionaries they're stored in are themselves stored in a list... but not in the same file as the media. While this is kind of nice for easy access in the utility algorithms, I'm willing to bet it hurts efficiency when the program actually has to do anything _with_ the collections. In my defense, this project falls before any database lessons in the Codecademy course it's from, so I think I did a pretty okay job without needing to jump a full unit ahead.
+
+### Algorithms
+Speaking of utility algorithms, these are probably the weakest area of the program. They aren't _bad_, but I'd be lying if I said I gave them the amount of consideration that they should get, for how big of an impact they have on the end performance. The algorithms relating to the genres are especially inefficient, as they tend to iterate over the collections several times even in the span of a few lines of code (nested loops, nested higher-order-functions, etc.). This isn't actually too bad of a cost in the current iteration of the project, but that is mainly because the collection of media is tiny compared to a production level program. I haven't tested it, but I have a funny feeling this current program wouldn't scale very well... 
+
+### Filtering
+Right now, the program can only filter the media based on the endpoints of the metrics. If you choose a movie by older release date, you will only ever get a group of the oldest three movies in the collection. While there are enough different combinations of metrics and media for this not to be a huge deal for this smaller sized sample program, eventually it might be smart to let users choose somewhere in the middle. 
+
+But what about choosing by genre? I was hoping you wouldn't ask... This is the section of the code that basically _works_, but just barely. On the bright side, this means that there is plenty for me to still improve on. So, what's wrong with it? Nothing, per se (like I said, it does work). It's just embarrassingly messy and _horribly_ inefficient. I mean, it calculates related media for **all** of the media types, regardless of if you chose a single media type or told the program you were unsure. Of each of those five individual branches (each media type, plus the unsure option), four of them will discard 75% of the calculated related media. In other words:
+
+ - You always calculate 12 pieces of related media (assuming there are actually 12 related pieces of media that exist).
+ - Of the five possible paths to continue from, only one of them returns all 12 pieces of media.
+ - The other four paths return 3 pieces of media and discard the other 9. 
+
+But wait, doesn't it do that for the other metrics as well? Yes, it does! However, those metrics are single pieces of data, whereas the genres are stored in lists. There's at least an entire extra layer of iteration involved when we're working with them over the other metrics, so it's more expensive to _get to this point_.
+
+See why I didn't want to mention it? This is one of those times where I had to stay realistic. Even getting this section to work the way I wanted was a bit of an ordeal (you'd be surprised what weird results you get when overlapping genres and media types; like including "fps" as one of the genres for Portal 2, or "animated" for Attack on Titan leads to a **super** interesting list of media deemed "kid-friendly" 😅). Because this took so long to get working in the first place, it was one area that I knew would take up all my time if I didn't let it go.  
+
+## Verdict
+So, what's my verdict on this project? It's a whole lot better than the one in my first article (Nothing to it, but to do it), that's for sure. I know it isn't perfect, but for where I am in my learning, for how much better the end result is than my first portfolio project, and for the amount of time the whole thing took (including writing this post), I'm pretty happy with it. And hey, at least I have some clear objectives for what can be improved in my next projects. Not too shabby for a self-taught former music teacher, if I may say so myself.
+
+- nothing-to-it.md
+# Nothing to it, but to do it
+
+_(This post was written as part of an assignment for the Computer Science Career Path from Codecademy.com)_
+
+If you told me a week ago that the hardest part of finishing an assignment for Codecademy would be to write about it for complete strangers online... 
+
+I probably would've believed you. 
+
+So let's give it a try!
+
+## The Background
+
+I've been coding for a little over a year now casually, but a few months ago, when I learned that I would not be returning to my job for the following year, I decided it might be a good opportunity to jump into a new field. Lots and lots of thinking and planning and gathering materials and information later, and now I'm finally starting to work through it all. 
+
+Right now, I am mainly using Codecademy's more guided paths (I am currently on the CS career path), since I know that I would benefit from the added handholding at the beginning. This was my way of attempting to fill in the gaps in my knowledge (since I was mainly self-taught), but it turns out I should really give myself more credit if it's due. I should have realized that when a course says it is "beginner friendly", it really means _beginner_ friendly.  
+
+## Getting Started
+
+As I started working, I quickly realized that to get the most out of this learning, I was going to have to consciously keep track of the time I spend on the projects. I usually tend to do one of two things: I'll either speed through everything and make a ton of mistakes just for the sake of moving onto the next thing, or I will do the complete opposite, and refuse to move on from a project until it is _exactly_ the way I want it. 
+
+My new objective was clear, but still somehow ambiguous. I've settled on saying that I need to spend a _good_ amount of time on my work (but not too much!). I especially need to push past the urge to fly through everything and submit the first fully working solution I find; but I also need to stop myself from getting caught in an endless loop of debugging and optimizing.  
+
+Am I putting too much thought into it? Who knows? I'm sure most people would probably say to stop talking about it and just write some code, so let's take a look at some. 
+
+[Take me to the GitHub page!](https://github.com/BendyLand/terminal_game/tree/main)
+
+First of all, what did I make? Well, the task was to build a terminal game using Python and version control with Git, then write a blog post about it (I really wasn't expecting that part, but here we are). It actually caught me so off guard to see the blog post requirement that I decided to dedicate the title to my long-standing and fairly severe fear of public eyes. I joked about it at the start, but it was a joke very much based on reality. All right, tangent over. Back to the project!
+
+I decided on a Connect-Four style game, since I thought it would be a pretty straightforward task. This was a little more tame, since this project had the most open ended directions, where I could use whatever methods I wanted; but to be honest, I put **way** more effort into the project before it (since it was a topic I was less comfortable with), so I think I might've actually just gotten lazy with this one. (You can find the GitHub page for the previous project [here](https://github.com/BendyLand/game).) 
+
+## The Project
+
+![A portion of code visible at the top of a text editor and a connect four game running in a terminal at the bottom](./posts/assets/demo.gif)
+
+The program itself is very straightforward; at the top it prompts the users for a name and sets the global variables  (I know I know, global bad; but again, trying to find a good balance between rushing through and getting caught in "paralysis by analysis" as an old music professor of mine called it). The game board is stored in lists, and when a player selects the column they want to place a piece in, a loop iterates through the rows to find the lowest option that hasn't been played, and changes the placeholder to the current player token before toggling the global variables. 
+
+All of the game logic is contained in three functions: display_board, play_round, and check_win. This is another area that I feel could have been improved with a bit more time and nitpicking. This is especially true for the check_win function, which is just plain cumbersome, and should probably make use of some smaller or higher order functions; not to mention I had a little help from Professor GPT for the diagonal checks after spending more than double the time on it that I wanted to. Again, coming back to, "I probably could've solved it myself, but that would've taken disproportionately longer and would've been much messier, so to save time I'll have a robot do it cleanly now and I'll just tidy it up to make sure it works then go back to analyze the structure myself later". 
+
+All that said, I'm not too concerned with the code. I know that it could be better, but I also know that it could be worse. I know that there are people out there who would've written it better, but I also know that there are people who would've written it worse. I'm happy with it as is, for being in the beginning stages of my structured learning. This was more about finding an approach that keeps me happy (something that wasn't always guaranteed at my old job), seeing how well I could balance my time, and getting over my huge fear of being seen (even if it's only by a name online). I'm sure I won't win the "race to senior dev" with that attitude, but I'll bet that I _will_ be happier and have more fun. That's good enough for me, at least for now ☺️
+
